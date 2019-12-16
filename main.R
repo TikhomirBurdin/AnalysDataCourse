@@ -49,11 +49,11 @@ nrubbishdf <- transform(nrubbishdf, per1000 =
                           nrubbishdf$new2 * 1000)
 nrubbishdf <- transform(nrubbishdf, Nper1000 = round(nrubbishdf$per1000, 2))
 
-axes1 <- ggplot(data = nrubbishdf) +
+axes2 <- ggplot(data = nrubbishdf) +
   geom_bar(mapping = aes(x = moscow_district, fill = moscow_district, y = Nper1000),
            stat = "identity", show.legend = FALSE)
 
-axes + labs(title = "Структура размещения контейнеров (шт.) по адм. округам в г. Москве",
+axes2 + labs(title = "Структура размещения контейнеров (шт.) по адм. округам в г. Москве",
        subtitle = "Источник: Портал открытых данных Правительства Москвы") +
   scale_fill_brewer(palette = "Blues") +
   theme_classic() +
