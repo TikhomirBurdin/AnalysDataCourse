@@ -1,4 +1,4 @@
-#Проект выполнили Бурдин Тихомир, Кияев Андрей
+#ГЏГ°Г®ГҐГЄГІ ГўГ»ГЇГ®Г«Г­ГЁГ«ГЁ ГЃГіГ°Г¤ГЁГ­ Г’ГЁГµГ®Г¬ГЁГ°, ГЉГЁГїГҐГў ГЂГ­Г¤Г°ГҐГ©
 
 library("ggplot2")
 library("httr")
@@ -18,8 +18,8 @@ colnames(nrubbishdf) <- c(
   "Bulky_waste_volume", "Placed_containers"
 )
 
-moscow_district <- c("ЦАО", "САО", "СВАО", "ВАО", "ЮВАО", "ЗеАО",
-                     "ЮЗАО", "ЗаАО", "СЗАО")
+moscow_district <- c("Г–ГЂГЋ", "Г‘ГЂГЋ", "Г‘Г‚ГЂГЋ", "Г‚ГЂГЋ", "ГћГ‚ГЂГЋ", "Г‡ГҐГЂГЋ",
+                     "ГћГ‡ГЂГЋ", "Г‡Г ГЂГЋ", "Г‘Г‡ГЂГЋ")
 nrubbishdf <- cbind(nrubbishdf, moscow_district)
 
 nrubbishdf[, "new1"] <- as.numeric(as.character(nrubbishdf[, "Placed_containers"]))
@@ -29,13 +29,13 @@ nrubbishdf[, "new2"] <- as.numeric(as.character(nrubbishdf[, "Actual_inhabitants
 ggplot(data = nrubbishdf) +
   geom_bar(mapping = aes(x = moscow_district, fill = moscow_district, y = new1),
            stat = "identity", show.legend = FALSE) +
-  labs(title = "Размещенные контейнеры (шт.) по административным округам в г. Москве",
-       subtitle = "Источник: Портал открытых данных Правительства Москвы") +
+  labs(title = "ГђГ Г§Г¬ГҐГ№ГҐГ­Г­Г»ГҐ ГЄГ®Г­ГІГҐГ©Г­ГҐГ°Г» (ГёГІ.) ГЇГ® Г Г¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГЁГўГ­Г»Г¬ Г®ГЄГ°ГіГЈГ Г¬ Гў ГЈ. ГЊГ®Г±ГЄГўГҐ",
+       subtitle = "Г€Г±ГІГ®Г·Г­ГЁГЄ: ГЏГ®Г°ГІГ Г« Г®ГІГЄГ°Г»ГІГ»Гµ Г¤Г Г­Г­Г»Гµ ГЏГ°Г ГўГЁГІГҐГ«ГјГ±ГІГўГ  ГЊГ®Г±ГЄГўГ»") +
   scale_fill_brewer(palette = "YlOrRd") +
   theme(panel.background = element_rect(fill = "Black"),
         panel.grid.major.x = element_line(colour = "Black")) +
-  scale_y_continuous(name = "Количество контейнеров") +
-  scale_x_discrete(name = "Административный округ") +
+  scale_y_continuous(name = "ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГЄГ®Г­ГІГҐГ©Г­ГҐГ°Г®Гў") +
+  scale_x_discrete(name = "ГЂГ¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГЁГўГ­Г»Г© Г®ГЄГ°ГіГЈ") +
   geom_label(data = nrubbishdf, aes(x = moscow_district,
                                  y = new1,
                                  label = new1), vjust = 1.5)
@@ -50,12 +50,12 @@ nrubbishdf <- transform(nrubbishdf, Nper1000 = round(nrubbishdf$per1000, 2))
 ggplot(data = nrubbishdf) +
   geom_bar(mapping = aes(x = moscow_district, fill = moscow_district, y = Nper1000),
            stat = "identity", show.legend = FALSE) +
-  labs(title = "Структура размещения контейнеров (шт.) по адм. округам в г. Москве",
-       subtitle = "Источник: Портал открытых данных Правительства Москвы") +
+  labs(title = "Г‘ГІГ°ГіГЄГІГіГ°Г  Г°Г Г§Г¬ГҐГ№ГҐГ­ГЁГї ГЄГ®Г­ГІГҐГ©Г­ГҐГ°Г®Гў (ГёГІ.) ГЇГ® Г Г¤Г¬. Г®ГЄГ°ГіГЈГ Г¬ Гў ГЈ. ГЊГ®Г±ГЄГўГҐ",
+       subtitle = "Г€Г±ГІГ®Г·Г­ГЁГЄ: ГЏГ®Г°ГІГ Г« Г®ГІГЄГ°Г»ГІГ»Гµ Г¤Г Г­Г­Г»Гµ ГЏГ°Г ГўГЁГІГҐГ«ГјГ±ГІГўГ  ГЊГ®Г±ГЄГўГ»") +
   scale_fill_brewer(palette = "Blues") +
   theme_classic() +
-  scale_y_continuous(name = "Кол-во контейнеров на 1000 чел. (шт.)") +
-  scale_x_discrete(name = "Административный округ") +
+  scale_y_continuous(name = "ГЉГ®Г«-ГўГ® ГЄГ®Г­ГІГҐГ©Г­ГҐГ°Г®Гў Г­Г  1000 Г·ГҐГ«. (ГёГІ.)") +
+  scale_x_discrete(name = "ГЂГ¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГЁГўГ­Г»Г© Г®ГЄГ°ГіГЈ") +
   geom_label(data = nrubbishdf, aes(x = moscow_district,
                                  y = Nper1000,
                                  label = Nper1000), vjust = 2)
@@ -65,12 +65,12 @@ ggplot(data = nrubbishdf) +
 ggplot(data = nrubbishdf) +
   geom_col(mapping = aes(x = moscow_district, fill = moscow_district, y = Nper1000)) +
   coord_polar() +
-  labs(title = "Структура размещения контейнеров (шт.) по адм. округам в г. Москве",
-       subtitle = "Источник: Портал открытых данных Правительства Москвы") +
+  labs(title = "Г‘ГІГ°ГіГЄГІГіГ°Г  Г°Г Г§Г¬ГҐГ№ГҐГ­ГЁГї ГЄГ®Г­ГІГҐГ©Г­ГҐГ°Г®Гў (ГёГІ.) ГЇГ® Г Г¤Г¬. Г®ГЄГ°ГіГЈГ Г¬ Гў ГЈ. ГЊГ®Г±ГЄГўГҐ",
+       subtitle = "Г€Г±ГІГ®Г·Г­ГЁГЄ: ГЏГ®Г°ГІГ Г« Г®ГІГЄГ°Г»ГІГ»Гµ Г¤Г Г­Г­Г»Гµ ГЏГ°Г ГўГЁГІГҐГ«ГјГ±ГІГўГ  ГЊГ®Г±ГЄГўГ»") +
   scale_fill_brewer(palette = "Purples") +
   theme(panel.background = element_rect(fill = "gray80")) +
-  scale_y_continuous(name = "Кол-во контейнеров на 1000 чел. (шт.)") +
-  scale_x_discrete(name = "Административный округ") +
+  scale_y_continuous(name = "ГЉГ®Г«-ГўГ® ГЄГ®Г­ГІГҐГ©Г­ГҐГ°Г®Гў Г­Г  1000 Г·ГҐГ«. (ГёГІ.)") +
+  scale_x_discrete(name = "ГЂГ¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГЁГўГ­Г»Г© Г®ГЄГ°ГіГЈ") +
   geom_label(data = nrubbishdf, aes(x = moscow_district,
                                  y = Nper1000,
                                  label = Nper1000), vjust = 1)
