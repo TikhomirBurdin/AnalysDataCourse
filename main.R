@@ -75,4 +75,4 @@ ggplot(data = nrubbishdf) +
                                  y = Nper1000,
                                  label = Nper1000), vjust = 1)
 library("lintr")
-lint("12346.R")
+lint("main.R")
