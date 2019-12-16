@@ -1,4 +1,4 @@
-#Ïðîåêò âûïîëíèëè Áóðäèí Òèõîìèð, Êèÿåâ Àíäðåé
+#Проект выполнили Бурдин Тихомир, Кияев Андрей
 
 library("ggplot2")
 library("httr")
@@ -18,8 +18,8 @@ colnames(nrubbishdf) <- c(
   "Bulky_waste_volume", "Placed_containers"
 )
 
-moscow_district <- c("ÖÀÎ", "ÑÀÎ", "ÑÂÀÎ", "ÂÀÎ", "ÞÂÀÎ", "ÇåÀÎ",
-                     "ÞÇÀÎ", "ÇàÀÎ", "ÑÇÀÎ")
+moscow_district <- c("ЦАО", "САО", "СВАО", "ВАО", "ЮВАО", "ЗеАО",
+                     "ЮЗАО", "ЗаАО", "СЗАО")
 nrubbishdf <- cbind(nrubbishdf, moscow_district)
 
 nrubbishdf[, "new1"] <- as.numeric(as.character(nrubbishdf[, "Placed_containers"]))
@@ -29,13 +29,13 @@ nrubbishdf[, "new2"] <- as.numeric(as.character(nrubbishdf[, "Actual_inhabitants
 ggplot(data = nrubbishdf) +
   geom_bar(mapping = aes(x = moscow_district, fill = moscow_district, y = new1),
            stat = "identity", show.legend = FALSE) +
-  labs(title = "Ðàçìåùåííûå êîíòåéíåðû (øò.) ïî àäìèíèñòðàòèâíûì îêðóãàì â ã. Ìîñêâå",
-       subtitle = "Èñòî÷íèê: Ïîðòàë îòêðûòûõ äàííûõ Ïðàâèòåëüñòâà Ìîñêâû") +
+  labs(title = "Размещенные контейнеры (шт.) по административным округам в г. Москве",
+       subtitle = "Источник: Портал открытых данных Правительства Москвы") +
   scale_fill_brewer(palette = "YlOrRd") +
   theme(panel.background = element_rect(fill = "Black"),
         panel.grid.major.x = element_line(colour = "Black")) +
-  scale_y_continuous(name = "Êîëè÷åñòâî êîíòåéíåðîâ") +
-  scale_x_discrete(name = "Àäìèíèñòðàòèâíûé îêðóã") +
+  scale_y_continuous(name = "Количество контейнеров") +
+  scale_x_discrete(name = "Административный округ") +
   geom_label(data = nrubbishdf, aes(x = moscow_district,
                                  y = new1,
                                  label = new1), vjust = 1.5)
@@ -50,12 +50,12 @@ nrubbishdf <- transform(nrubbishdf, Nper1000 = round(nrubbishdf$per1000, 2))
 ggplot(data = nrubbishdf) +
   geom_bar(mapping = aes(x = moscow_district, fill = moscow_district, y = Nper1000),
            stat = "identity", show.legend = FALSE) +
-  labs(title = "Ñòðóêòóðà ðàçìåùåíèÿ êîíòåéíåðîâ (øò.) ïî àäì. îêðóãàì â ã. Ìîñêâå",
-       subtitle = "Èñòî÷íèê: Ïîðòàë îòêðûòûõ äàííûõ Ïðàâèòåëüñòâà Ìîñêâû") +
+  labs(title = "Структура размещения контейнеров (шт.) по адм. округам в г. Москве",
+       subtitle = "Источник: Портал открытых данных Правительства Москвы") +
   scale_fill_brewer(palette = "Blues") +
   theme_classic() +
-  scale_y_continuous(name = "Êîë-âî êîíòåéíåðîâ íà 1000 ÷åë. (øò.)") +
-  scale_x_discrete(name = "Àäìèíèñòðàòèâíûé îêðóã") +
+  scale_y_continuous(name = "Кол-во контейнеров на 1000 чел. (шт.)") +
+  scale_x_discrete(name = "Административный округ") +
   geom_label(data = nrubbishdf, aes(x = moscow_district,
                                  y = Nper1000,
                                  label = Nper1000), vjust = 2)
@@ -65,12 +65,12 @@ ggplot(data = nrubbishdf) +
 ggplot(data = nrubbishdf) +
   geom_col(mapping = aes(x = moscow_district, fill = moscow_district, y = Nper1000)) +
   coord_polar() +
-  labs(title = "Ñòðóêòóðà ðàçìåùåíèÿ êîíòåéíåðîâ (øò.) ïî àäì. îêðóãàì â ã. Ìîñêâå",
-       subtitle = "Èñòî÷íèê: Ïîðòàë îòêðûòûõ äàííûõ Ïðàâèòåëüñòâà Ìîñêâû") +
+  labs(title = "Структура размещения контейнеров (шт.) по адм. округам в г. Москве",
+       subtitle = "Источник: Портал открытых данных Правительства Москвы") +
   scale_fill_brewer(palette = "Purples") +
   theme(panel.background = element_rect(fill = "gray80")) +
-  scale_y_continuous(name = "Êîë-âî êîíòåéíåðîâ íà 1000 ÷åë. (øò.)") +
-  scale_x_discrete(name = "Àäìèíèñòðàòèâíûé îêðóã") +
+  scale_y_continuous(name = "Кол-во контейнеров на 1000 чел. (шт.)") +
+  scale_x_discrete(name = "Административный округ") +
   geom_label(data = nrubbishdf, aes(x = moscow_district,
                                  y = Nper1000,
                                  label = Nper1000), vjust = 1)
